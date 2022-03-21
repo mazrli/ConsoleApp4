@@ -20,8 +20,26 @@ namespace ConsoleApp4
                 case 'W' or 'm':
                     return (Height - 100) - ((Height - 150) / 2);
                 default:
-                    return 0;
+                    throw new ArgumentException("The Sex argument is not valid");
             }
+        }
+
+
+
+        public  List<double> GetIdealBodyWeightFromDataSource()
+        {
+            List<double> result = new List<double>();
+
+
+            var repo = new WeightRepository();
+
+
+            IEnumerable<WeigtCalcuator> weights = repo.GetWeigtCalcuatorList();
+            foreach (var weight in weights)
+            {
+                result.Add(weight.GetIdealBodyWeight());
+            }
+            return result;
         }
 
 
